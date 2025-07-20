@@ -10,7 +10,7 @@ import time
 
 # إعداد الصفحة
 st.set_page_config(
-    page_title="Fayoud AI ULTRA",
+    page_title="Fayoud AI ULTRA - أداة التداول الذكية",
     page_icon="🚀",
     layout="wide",
     initial_sidebar_state="collapsed"
@@ -228,7 +228,8 @@ with col1:
 with col2:
     st.markdown("### 📈 نتائج التحليل")
     
-    if hasattr(st.session_state, 'recommendation'):
+    # عرض النتائج بناءً على session state
+    if 'recommendation' in st.session_state:
         # عرض التوصية
         st.markdown(f"""
         <div class="result-card">
@@ -262,10 +263,7 @@ with col2:
         </div>
         """, unsafe_allow_html=True)
         
-        # تحديث العد التنازلي كل ثانية
-        placeholder = st.empty()
-        
-        # إضافة تحديث تلقائي للوقت
+        # زر تحديث الوقت (إذا لزم الأمر)
         if st.button("🔄 تحديث الوقت", use_container_width=True):
             current_time = datetime.now()
             time_remaining = calculate_time_to_next_candle(current_time, 1)
@@ -298,8 +296,9 @@ st.markdown("""
 **تم تطوير هذه الأداة بواسطة فريق Fayoud AI**
 """)
 
-# تشغيل تلقائي للتحديث
-if hasattr(st.session_state, 'recommendation'):
-    time.sleep(1)
-    st.rerun()
+# إزالة st.rerun() التلقائي
+# if 'recommendation' in st.session_state:
+#     time.sleep(1)
+#     st.rerun() # هذا الجزء تم إزالته أو تعديله لتجنب مشاكل التحديث المستمر
+
 
