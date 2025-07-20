@@ -234,7 +234,7 @@ with col2:
         st.markdown(f"""
         <div class="result-card">
             <h3>📈 التوصية</h3>
-            <h2 style="color: {'#28a745' if 'CALL' in st.session_state.recommendation else '#dc3545'};">
+            <h2 style="color: {'#28a745' if 'CALL' in st.session_state.recommendation else '#dc3545'};
                 {st.session_state.recommendation}
             </h2>
         </div>
@@ -264,14 +264,8 @@ with col2:
         """, unsafe_allow_html=True)
         
         # زر تحديث الوقت (إذا لزم الأمر)
-        if st.button("🔄 تحديث الوقت", use_container_width=True):
-            current_time = datetime.now()
-            time_remaining = calculate_time_to_next_candle(current_time, 1)
-            minutes = time_remaining // 60
-            seconds = time_remaining % 60
-            new_timer = f"{minutes:02d}:{seconds:02d}"
-            st.session_state.timer = new_timer
-            st.rerun()
+        # تم إزالة زر التحديث التلقائي لتجنب مشاكل التحديث المستمر
+        # يمكن إضافة زر تحديث يدوي إذا رغب المستخدم
     
     else:
         st.info("👆 ارفع صورة الشارت أولاً للحصول على التحليل")
@@ -295,10 +289,5 @@ st.markdown("""
 
 **تم تطوير هذه الأداة بواسطة فريق Fayoud AI**
 """)
-
-# إزالة st.rerun() التلقائي
-# if 'recommendation' in st.session_state:
-#     time.sleep(1)
-#     st.rerun() # هذا الجزء تم إزالته أو تعديله لتجنب مشاكل التحديث المستمر
 
 
